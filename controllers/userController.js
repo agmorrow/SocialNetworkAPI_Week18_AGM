@@ -2,6 +2,28 @@ const { User } = require("../models");
 const { isEmail } = require('validator');
 
 module.exports = {
+// create a new user
+	// /api/users
+  createUser: async (req, res) => {
+    const { username, email } = req.body;
+
+    if (!isEmail(email)) {
+      return res.status(401).json({ error: 'Email must be a valid email address'});
+    }
+
+    try { 
+      const newUser = await User.create({
+        username,
+        email
+      });
+      res.json(newUser);
+
+    } catch (e) {
+      res.json(e);
+    }
+
+  },
+
 	// get all users
 	// /api/users
 	getAllUsers(req, res) {
@@ -30,27 +52,7 @@ module.exports = {
 			});
 	},
 
-	// create a new user
-	// /api/users
-  createUser: async (req, res) => {
-    const { username, email } = req.body;
-
-    if (!isEmail(email)) {
-      return res.status(401).json({ error: 'Email must be a valid email address'});
-    }
-
-    try { 
-      const newUser = await User.create({
-        username,
-        email
-      });
-      res.json(newUser);
-
-    } catch (e) {
-      res.json(e);
-    }
-
-  },
+	
 	// update a user by it's ID
 	// /api/users/:id
 	updateUser({ params, body }, res) {

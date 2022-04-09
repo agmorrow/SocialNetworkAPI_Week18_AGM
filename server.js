@@ -15,7 +15,6 @@ mongoose.connect('mongodb://localhost:27017/socialNetworkDB')
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(express.static('public'));
   app.use(routes);
 
   app.listen(PORT, () => console.log('Server is running'));
