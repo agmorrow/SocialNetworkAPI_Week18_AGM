@@ -1,12 +1,8 @@
-const router = require('express').Router();
-const userRoutes = require('./users');
-const thoughtRoutes = require('./thoughts');
-const { User, Thought } = require('../../models');
+const router = require("express").Router();
+const userRoutes = require("./users");
+const thoughtsRoutes = require("./thoughts");
 
-// add prefixes of /user and /thought
-router.use('/users', userRoutes);
-router.use('/friends', userRoutes);
-router.use('/thoughts', thoughtRoutes);
-router.use('/reactions', thoughtRoutes)
+router.use("/users", userRoutes);
+router.use("/thoughts", thoughtsRoutes);
 
 module.exports = router;
