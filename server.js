@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-mongoose.connect('mongodb://;localhost:27017/socialnetworkDB')
+mongoose.connect('mongodb://localhost:27017/socialNetworkDB')
   .then(async () => {
     console.log('Successfully connect to MongoDB');
   

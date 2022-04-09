@@ -5,8 +5,8 @@ const userSchema = new Schema({
   username: {
     type: String,
     unique: true,
-    required: true,
-    trim: [true, 'Username is required and must be a minimum of 4 and maximum of 8 characters'],
+    trim: true,
+    required: [true, 'Username is required and must be a minimum of 4 and maximum of 8 characters'],
   },
   email: {
     type: String,
@@ -34,7 +34,20 @@ const userSchema = new Schema({
         ref: 'User'
       },
     ]
+  },
+  {
+    toJSON: {
+      virtual: true,
+      getters: true
+    },
+    id:false
+  }
+);
+
+userSchema.virtual('friendCount').get(function(){
+  return this.friends.length
 });
+
 
 const User = model('Users', userSchema);
 
