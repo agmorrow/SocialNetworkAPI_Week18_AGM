@@ -19,6 +19,7 @@
   "homepage": "https://github.com/agmorrow/SocialNetworkAPI_Week18_AGM#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "moment": "^2.29.2",
     "mongoose": "^6.2.10",
     "validator": "^13.7.0"
   }
