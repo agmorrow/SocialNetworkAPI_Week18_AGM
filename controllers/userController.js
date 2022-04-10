@@ -26,15 +26,24 @@ module.exports = {
 
 	// get all users
 	// /api/users
-	getAllUsers(req, res) {
-		User.find({})
-			.select("-__v")
-			.then(dbUserData => res.json(dbUserData))
-			.catch(err => {
-				console.log(err);
-				res.json(err);
-			});
-	},
+	// getAllUsers(req, res) {
+	// 	User.find({})
+	// 		.select("-__v")
+	// 		.then(dbUserData => res.json(dbUserData))
+	// 		.catch(err => {
+	// 			console.log(err);
+	// 			res.json(err);
+	// 		});
+	// },
+
+	getAllUsers: async (req, res) => {
+    try { 
+      const users = await User.find({});
+      res.json(users);
+    } catch (e) {
+      res.json(e);
+    }
+  },
 
 	// get one user by ID
 	// /api/users/:id
@@ -51,6 +60,7 @@ module.exports = {
 				res.json(err);
 			});
 	},
+
 
 	
 	// update a user by it's ID

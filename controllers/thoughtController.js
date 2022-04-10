@@ -1,12 +1,58 @@
-const { Thoughts, User } = require("../models");
+const { Thought } = require("../models");
 
-const thoughtsController = {
+module.exports = {
+	// createThought({ body }, res) {
+	// 	Thoughts.create(body)
+	// 		.then(({ _id }) => {
+	// 			console.log(_id);
+	// 			return User.findOneAndUpdate(
+	// 				{ _id: body.userId },
+	// 				{ $push: { thoughts: _id } },
+	// 				{ new: true }
+	// 			);
+	// 		})
+	// 		.then(dbThoughtsData => {
+	// 			if (!dbThoughtsData) {
+	// 				res.status(404).json({ message: "No thought found with that id!" });
+	// 				return;
+	// 			}
+	// 			res.json(dbThoughtsData);
+	// 		})
+	// 		.catch(err => res.json(err));
+	// },
+
+
+	createThought: async (req, res) => {
+		const { thoughtText, username, userId } = req.body;
+		try {
+			const newThought = await Thought.create({ thoughtText, username, userId });
+			res.json(newThought);
+		} catch (e) {
+			res.json(e);
+		}
+	},
+
+
 	// get all thought
 	// /api/thoughts
-	getAllThoughts(req, res) {
-		Thoughts.find({})
-			.then(dbThoughtsData => res.json(dbThoughtsData))
-			.catch(err => res.json(err));
+	// getAllThoughts(req, res) {
+	// 	Thoughts.find({})
+	// 		.then(dbThoughtsData => res.json(dbThoughtsData))
+	// 		.catch(err => res.json(err));
+	// },
+
+
+
+	getAllThoughts: async (req, res) => {
+		try {
+			const thoughts = await Thoughts.find().populate({
+				path: 'userId',
+				select: '-thoughtText -username -userId'
+			});
+			res.json(thoughts);
+		} catch (e) {
+			res.json(e);
+		}
 	},
 
 	// get one thought by ID
@@ -25,25 +71,7 @@ const thoughtsController = {
 
 	// create a new thought
 	// /api/thoughts
-	createThought({ body }, res) {
-		Thoughts.create(body)
-			.then(({ _id }) => {
-				console.log(_id);
-				return User.findOneAndUpdate(
-					{ _id: body.userId },
-					{ $push: { thoughts: _id } },
-					{ new: true }
-				);
-			})
-			.then(dbThoughtsData => {
-				if (!dbThoughtsData) {
-					res.status(404).json({ message: "No thought found with that id!" });
-					return;
-				}
-				res.json(dbThoughtsData);
-			})
-			.catch(err => res.json(err));
-	},
+
 
 	// update a thought by ID
 	// /api/thoughts/:id
@@ -104,4 +132,3 @@ const thoughtsController = {
 	},
 };
 
-module.exports = thoughtsController;
