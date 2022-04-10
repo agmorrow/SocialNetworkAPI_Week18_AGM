@@ -32,7 +32,7 @@ node server.js or nodemon server.js (if you have nodemon installed)
 
 ### Walk through video
 
-<a href="#" target="_blank">Walk through video</a>
+<a href="https://youtu.be/f-g254cGRGs" target="_blank">Walk through video</a>
 
 
 ## Credits
