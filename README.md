@@ -14,7 +14,6 @@ I was given a task to build an API for a social network web application where us
 ```bash
 https://nodejs.org/en/download/
 
-npm i msql2
 ** It is also important to have a MongoDB GUI installed.
 ```
 - Make sure you install node_modules to your file
