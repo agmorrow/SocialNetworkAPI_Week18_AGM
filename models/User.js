@@ -1,5 +1,10 @@
-const { Schema, model } = require('mongoose');
-const { isEmail } = require('validator');
+const {
+  Schema,
+  model
+} = require('mongoose');
+const {
+  isEmail
+} = require('validator');
 
 const userSchema = new Schema({
   username: {
@@ -13,38 +18,32 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     validate: {
-			// actual value for email that the user is providing
-			validator: function(value) {
-				return isEmail(value);
-			},
-      message: function(userObject) {
-				return `${userObject.email} is not a valid email address`;
-			},
-		}
-  },
-  thoughts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Thought'
-    },
-  ],
-    friends: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+      // actual value for email that the user is providing
+      validator: function (value) {
+        return isEmail(value);
       },
-    ]
+      message: function (userObject) {
+        return `${userObject.email} is not a valid email address`;
+      },
+    }
   },
-  {
-    toJSON: {
-      virtual: true,
-      getters: true
-    },
-    id:false
-  }
-);
+  thoughts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Thought'
+  }, ],
+  friends: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }, ]
+}, {
+  toJSON: {
+    virtual: true,
+    getters: true
+  },
+  id: false
+});
 
-userSchema.virtual('friendCount').get(function(){
+userSchema.virtual('friendCount').get(function () {
   return this.friends.length
 });
 
