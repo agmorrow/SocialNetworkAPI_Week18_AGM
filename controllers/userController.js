@@ -24,17 +24,6 @@ module.exports = {
 
   },
 
-	// get all users
-	// /api/users
-	// getAllUsers(req, res) {
-	// 	User.find({})
-	// 		.select("-__v")
-	// 		.then(dbUserData => res.json(dbUserData))
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 			res.json(err);
-	// 		});
-	// },
 
 	getAllUsers: async (req, res) => {
     try { 
@@ -62,7 +51,6 @@ module.exports = {
 	},
 
 
-	
 	// update a user by it's ID
 	// /api/users/:id
 	updateUser({ params, body }, res) {
